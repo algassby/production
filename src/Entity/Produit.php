@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProduitRepository")
@@ -22,23 +24,25 @@ class Produit
     private $reference;
 
     /**
+     * @Assert\Length( min = 15, max = 500, minMessage="entre plus", maxMessage="entre moins")
      * @ORM\Column(type="string", length=255)
      */
     private $description;
 
     /**
+     *
+     * @ORM\Column(type="string", length=255)
+     */
+    private $image;
+
+    /**
+     * @Assert\Positive
      * @ORM\Column(type="integer")
      */
     private $prix;
 
     /**
-     * @ORM\Column(type="blob")
-     */
-    private $image;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Categorie", inversedBy="produit")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Categorie")
      */
     private $categorie;
 
@@ -71,6 +75,18 @@ class Produit
         return $this;
     }
 
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
     public function getPrix(): ?int
     {
         return $this->prix;
@@ -79,18 +95,6 @@ class Produit
     public function setPrix(int $prix): self
     {
         $this->prix = $prix;
-
-        return $this;
-    }
-
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    public function setImage($image): self
-    {
-        $this->image = $image;
 
         return $this;
     }

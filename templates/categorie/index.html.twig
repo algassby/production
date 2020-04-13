@@ -9,6 +9,7 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Titre</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -16,6 +17,7 @@
         {% for categorie in categories %}
             <tr>
                 <td>{{ categorie.id }}</td>
+                <td>{{ categorie.titre }}</td>
                 <td>
                     <a href="{{ path('categorie_show', {'id': categorie.id}) }}">show</a>
                     <a href="{{ path('categorie_edit', {'id': categorie.id}) }}">edit</a>
@@ -23,7 +25,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="2">no records found</td>
+                <td colspan="3">no records found</td>
             </tr>
         {% endfor %}
         </tbody>

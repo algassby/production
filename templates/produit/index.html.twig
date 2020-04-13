@@ -11,8 +11,8 @@
                 <th>Id</th>
                 <th>Reference</th>
                 <th>Description</th>
-                <th>Prix</th>
                 <th>Image</th>
+                <th>Prix</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -22,8 +22,8 @@
                 <td>{{ produit.id }}</td>
                 <td>{{ produit.reference }}</td>
                 <td>{{ produit.description }}</td>
-                <td>{{ produit.prix }}</td>
                 <td>{{ produit.image }}</td>
+                <td>{{ produit.prix }}</td>
                 <td>
                     <a href="{{ path('produit_show', {'id': produit.id}) }}">show</a>
                     <a href="{{ path('produit_edit', {'id': produit.id}) }}">edit</a>

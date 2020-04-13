@@ -2,9 +2,9 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CategorieRepository")
@@ -19,48 +19,30 @@ class Categorie
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Produit", mappedBy="categorie")
+     * @ORM\Column(type="string", length=255)
      */
-    private $produit;
-
-    public function __construct()
-    {
-        $this->produit = new ArrayCollection();
-    }
+    private $titre;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return Collection|Produit[]
-     */
-    public function getProduit(): Collection
+    public function getTitre(): ?string
     {
-        return $this->produit;
+        return $this->titre;
     }
 
-    public function addProduit(Produit $produit): self
+    public function setTitre(string $titre): self
     {
-        if (!$this->produit->contains($produit)) {
-            $this->produit[] = $produit;
-            $produit->setCategorie($this);
-        }
+        $this->titre = $titre;
 
         return $this;
     }
 
-    public function removeProduit(Produit $produit): self
+    public function __toString()
     {
-        if ($this->produit->contains($produit)) {
-            $this->produit->removeElement($produit);
-            // set the owning side to null (unless already changed)
-            if ($produit->getCategorie() === $this) {
-                $produit->setCategorie(null);
-            }
-        }
-
-        return $this;
+        return $this->titre;
     }
+
 }
